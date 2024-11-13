@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/details/:movieID",
+        path: "/details/:movieId",
         element: (
           <Suspense fallback={<h1>Loading....</h1>}>
             <MovieDetails />
