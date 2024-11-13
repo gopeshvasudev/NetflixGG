@@ -1,5 +1,6 @@
 import React from "react";
 import MovieCard from "./MovieCard";
+import { Link } from "react-router-dom";
 
 const MovieList = ({ listData }) => {
   return (
@@ -9,10 +10,11 @@ const MovieList = ({ listData }) => {
       <div className="scrollable-container flex overflow-x-auto">
         <div className="flex gap-3">
           {listData.movies?.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              data={{ imagePath: movie.poster_path, name: movie.title }}
-            />
+            <Link to={`/details/${movie.id}`} key={movie.id}>
+              <MovieCard
+                data={{ imagePath: movie.poster_path, name: movie.title }}
+              />
+            </Link>
           ))}
         </div>
       </div>
