@@ -15,13 +15,13 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full top-0 left-0 z-50 overflow-hidden">
+    <header className="fixed w-full top-0 left-0 z-[100] overflow-hidden">
       <nav className="relative navbar w-full h-[12vh] bg-gradient-to-b from-zinc-950 to-transparent text-white flex items-center justify-between px-2 sm:px-5">
         <div className="left flex items-center gap-10">
           <img src="../logo.webp" alt="Logo" className="w-[180px]" />
         </div>
 
-        <div className="hidden top-0 left-0 bg-black md:bg-transparent h-screen md:static right flex-col md:flex-row items-center justify-center md:justify-between w-full gap-20 md:gap-3 pl-10">
+        <div className="flex top-0 left-0 bg-black md:bg-transparent h-screen md:static right flex-col md:flex-row items-center justify-center md:justify-between w-full gap-20 md:gap-3 pl-10">
         
           <div className="links">
             <ul className="flex flex-col md:flex-row items-center gap-10">

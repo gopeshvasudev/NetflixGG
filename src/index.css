@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: gg;
-    src: url(../Bonny-Variable.woff2);
+  font-family: gg;
+  src: url(../Bonny-Variable.woff2);
+}
+
+.scrollable-container::-webkit-scrollbar {
+  display: none;
 }
