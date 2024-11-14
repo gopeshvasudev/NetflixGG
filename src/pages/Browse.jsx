@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import MovieList from "../components/MovieList";
 
 const Browse = () => {
+  document.title = "Netflix | Browse";
   const [highlightedMovieIndex, setHighlightedMovieIndex] = useState(0);
 
   useNowPlayingMovies();

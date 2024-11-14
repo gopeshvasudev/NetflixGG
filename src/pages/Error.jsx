@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useRouteError } from "react-router-dom";
 
 const Error = () => {
+  document.title = "Netflix | Error";
   const error = useRouteError();
   const { status, statusText } = error;
 

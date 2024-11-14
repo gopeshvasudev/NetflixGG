@@ -3,6 +3,7 @@ import SignUpForm from "../components/SignUpForm";
 import SignInForm from "../components/SignInForm";
 
 const Login = () => {
+  document.title = "Netflix | Login";
   const [isLoginForm, setIsLoginForm] = useState(true);
 
   const styles = {

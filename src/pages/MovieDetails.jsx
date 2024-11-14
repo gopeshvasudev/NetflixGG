@@ -4,6 +4,7 @@ import useMovieDetails from "../hooks/useMovieDetails";
 import { useSelector } from "react-redux";
 
 const MovieDetails = () => {
+  document.title = "Netflix | Details";
   const { movieId } = useParams();
 
   useMovieDetails(movieId);
@@ -75,7 +76,7 @@ const MovieDetails = () => {
 
           {status == "Released" && (
             <Link
-              to={`/watch/${movieId}`}
+              to={`/movie/watch/${movieId}`}
               className="font-semibold text-sm bg-[#ED1C28] p-2 rounded-lg"
             >
               Watch Now

@@ -14,7 +14,7 @@ const MovieInfo = ({ movie }) => {
       </p>
 
       <Link
-        to={`/watch/${movie?.id}`}
+        to={`/movie/watch/${movie?.id}`}
         className="px-5 py-2 rounded-full bg-white text-black font-semibold flex items-center gap-1 hover:bg-[#ED1C28] hover:text-white transition-all mt-5"
       >
         <span>

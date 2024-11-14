@@ -36,7 +36,11 @@ const App = () => {
 
   return (
     <>
-      {window.location.pathname !== "/" && <Header />}
+      {!(
+        window.location.pathname === "/" ||
+        window.location.pathname.startsWith("/movie/watch")
+      ) && <Header />}
+
       <Outlet />
     </>
   );

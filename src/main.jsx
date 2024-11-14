@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import MovieDetails from "./pages/MovieDetails.jsx";
+import MovieWatch from "./pages/MovieWatch.jsx";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const Browse = lazy(() => import("./pages/Browse.jsx"));
@@ -38,10 +39,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/details/:movieId",
+        path: "/movie/:movieId",
         element: (
           <Suspense fallback={<h1>Loading....</h1>}>
             <MovieDetails />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/movie/watch/:movieId",
+        element: (
+          <Suspense fallback={<h1>Loading....</h1>}>
+            <MovieWatch />
           </Suspense>
         ),
       },

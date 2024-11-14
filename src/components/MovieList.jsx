@@ -10,7 +10,7 @@ const MovieList = ({ listData }) => {
       <div className="scrollable-container flex overflow-x-auto">
         <div className="flex gap-3">
           {listData.movies?.map((movie) => (
-            <Link to={`/details/${movie.id}`} key={movie.id}>
+            <Link to={`/movie/${movie.id}`} key={movie.id}>
               <MovieCard
                 data={{ imagePath: movie.poster_path, name: movie.title }}
               />

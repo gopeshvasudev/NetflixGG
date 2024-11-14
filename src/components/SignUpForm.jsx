@@ -15,7 +15,7 @@ const SignUpForm = ({ handleState }) => {
   const {
     register,
     handleSubmit,
-    formState: { error },
+    formState: { errors },
     reset,
   } = useForm();
 
@@ -61,16 +61,20 @@ const SignUpForm = ({ handleState }) => {
         type="text"
         name="fullname"
         placeholder="Fullname"
-        {...register("fullname")}
+        {...register("fullname", { required: true })}
       />
+      {errors.fullname && <p className="text-sm text-red-500">Fullname is required</p>}
+
       <input
         autoComplete="off"
         className="w-full p-3 bg-zinc-800/70 rounded-sm outline-none"
         type="email"
         name="email"
         placeholder="Email"
-        {...register("email")}
+        {...register("email", { required: true })}
       />
+      {errors.email && <p className="text-sm text-red-500">Email is required</p>}
+
       <div className="w-full pr-3 flex items-center gap-2  bg-zinc-800/70">
         <input
           autoComplete="off"
@@ -78,7 +82,7 @@ const SignUpForm = ({ handleState }) => {
           type={!isViewPassword ? "password" : "text"}
           name="password"
           placeholder="Password"
-          {...register("password")}
+          {...register("password", { required: true })}
         />
 
         <span onClick={() => setIsViewPassword(!isViewPassword)}>
@@ -89,6 +93,8 @@ const SignUpForm = ({ handleState }) => {
           )}
         </span>
       </div>
+      {errors.password && <p className="text-sm text-red-500">Password is required</p>}
+      
       <p
         className="text-sm cursor-pointer my-2 text-center text-zinc-400"
         onClick={() => setIsLoginForm(!isLoginForm)}
