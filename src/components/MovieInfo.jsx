@@ -1,5 +1,5 @@
 import React from "react";
-import { FaPlay } from "react-icons/fa";
+import { FaInfoCircle, FaPlay } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const MovieInfo = ({ movie }) => {
@@ -13,15 +13,27 @@ const MovieInfo = ({ movie }) => {
         {movie?.overview}
       </p>
 
+      <div className="flex items-center gap-2">
       <Link
         to={`/movie/watch/${movie?.id}`}
-        className="px-5 py-2 rounded-full bg-white text-black font-semibold flex items-center gap-1 hover:bg-[#ED1C28] hover:text-white transition-all mt-5"
+        className="px-5 py-2 rounded-full bg-white border-2 border-transparent text-black font-semibold flex items-center gap-1 hover:bg-transparent hover:text-white hover:border-white transition-all mt-5"
       >
         <span>
           <FaPlay />
         </span>
         Play
       </Link>
+
+      <Link
+        to={`/movie/${movie?.id}`}
+        className="px-5 py-2 rounded-full bg-zinc-800/40 border-2 border-transparent font-semibold flex items-center gap-1 hover:bg-transparent hover:border-zinc-800 hover:text-white transition-all mt-5"
+      >
+        <span>
+          <FaInfoCircle />
+        </span>
+        More Info
+      </Link>
+      </div>
     </div>
   );
 };

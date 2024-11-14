@@ -5,12 +5,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
-import MovieDetails from "./pages/MovieDetails.jsx";
-import MovieWatch from "./pages/MovieWatch.jsx";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const Browse = lazy(() => import("./pages/Browse.jsx"));
 const Error = lazy(() => import("./pages/Error.jsx"));
+const MovieDetails = lazy(() => import("./pages/MovieDetails.jsx"));
+const MovieWatch = lazy(() => import("./pages/MovieWatch.jsx"));
 
 const router = createBrowserRouter([
   {

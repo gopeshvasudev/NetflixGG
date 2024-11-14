@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { auth as authProvider } from "../firebase/index";
 import { signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const user = useSelector((store) => store.auth.user);
@@ -18,20 +19,12 @@ const Header = () => {
     <header className="fixed w-full top-0 left-0 z-[100] overflow-hidden">
       <nav className="relative navbar w-full h-[12vh] bg-gradient-to-b from-zinc-950 to-transparent text-white flex items-center justify-between px-2 sm:px-5">
         <div className="left flex items-center gap-10">
-          <img src="../logo.webp" alt="Logo" className="w-[180px]" />
+          <Link to={"/browse"}>
+            <img src="../logo.webp" alt="Logo" className="w-[180px]" />
+          </Link>
         </div>
 
-        <div className="flex top-0 left-0 bg-black md:bg-transparent h-screen md:static right flex-col md:flex-row items-center justify-center md:justify-between w-full gap-20 md:gap-3 pl-10">
-        
-          <div className="links">
-            <ul className="flex flex-col md:flex-row items-center gap-10">
-              <li className="font-semibold">Home</li>
-              <li className="font-medium text-zinc-300">About</li>
-              <li className="font-medium text-zinc-300">Contact</li>
-              <li className="font-medium text-zinc-300">Services</li>
-            </ul>
-          </div>
-
+        <div className="right">
           <div className="flex items-center gap-3">
             <div className="avatar w-[40px] h-[40px] border-2 border-white rounded-full overflow-hidden">
               <img
