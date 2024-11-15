@@ -32,7 +32,11 @@ const MovieDetails = () => {
   };
 
   if (!movieDetails) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="w-full h-screen flex items-center justify-center bg-zinc-950 text-white">
+        <h1 className="text-2xl font-semibold">Loading....</h1>
+      </div>
+    );
   }
 
   return (
@@ -53,7 +57,9 @@ const MovieDetails = () => {
             {title}
           </h1>
 
-          <h2 className="font-medium text-xl text-center md:text-start">{tagline}</h2>
+          <h2 className="font-medium text-xl text-center md:text-start">
+            {tagline}
+          </h2>
 
           <div className="genres my-5">
             <ul className="flex gap-5">
@@ -68,7 +74,9 @@ const MovieDetails = () => {
             </ul>
           </div>
 
-          <p className="text-zinc-300 w-[80%] text-center md:text-start">{overview}</p>
+          <p className="text-zinc-300 w-[80%] text-center md:text-start">
+            {overview}
+          </p>
 
           <h6 className="text-sm text-zinc-300 font-medium mt-5 mb-7">
             Release Date: {release_date}

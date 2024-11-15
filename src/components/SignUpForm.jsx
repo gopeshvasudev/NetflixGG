@@ -8,6 +8,7 @@ import { addUser } from "../store/reducers/authSlice";
 
 const SignUpForm = ({ handleState }) => {
   const [isViewPassword, setIsViewPassword] = useState(false);
+  const [firebaseError, setFirebaseError] = useState(null);
   const { isLoginForm, setIsLoginForm } = handleState;
 
   const dispatch = useDispatch();
@@ -25,7 +26,13 @@ const SignUpForm = ({ handleState }) => {
     try {
       const user = await auth.signUp({ email, password });
 
-      if (user) {
+      if (user && user.errorCode) {
+        if (user.errorCode === "auth/invalid-email") {
+          setFirebaseError("Invalid Email");
+        } else if (user.errorCode === "auth/email-already-in-use") {
+          setFirebaseError("User Already Exist");
+        }
+      } else {
         await auth.updateUser({ fullname });
 
         const { displayName, email, uid, photoURL } = authProvider.currentUser;
@@ -63,7 +70,9 @@ const SignUpForm = ({ handleState }) => {
         placeholder="Fullname"
         {...register("fullname", { required: true })}
       />
-      {errors.fullname && <p className="text-sm text-red-500">Fullname is required</p>}
+      {errors.fullname && (
+        <p className="text-sm text-red-500">Fullname is required</p>
+      )}
 
       <input
         autoComplete="off"
@@ -73,7 +82,9 @@ const SignUpForm = ({ handleState }) => {
         placeholder="Email"
         {...register("email", { required: true })}
       />
-      {errors.email && <p className="text-sm text-red-500">Email is required</p>}
+      {errors.email && (
+        <p className="text-sm text-red-500">Email is required</p>
+      )}
 
       <div className="w-full pr-3 flex items-center gap-2  bg-zinc-800/70">
         <input
@@ -93,8 +104,10 @@ const SignUpForm = ({ handleState }) => {
           )}
         </span>
       </div>
-      {errors.password && <p className="text-sm text-red-500">Password is required</p>}
-      
+      {errors.password && (
+        <p className="text-sm text-red-500">Password is required</p>
+      )}
+      {firebaseError && <p className="text-sm text-red-500">{firebaseError}</p>}
       <p
         className="text-sm cursor-pointer my-2 text-center text-zinc-400"
         onClick={() => setIsLoginForm(!isLoginForm)}

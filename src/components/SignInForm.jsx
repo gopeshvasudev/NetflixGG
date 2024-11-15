@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import auth from "../firebase/auth";
-import { useNavigate } from "react-router-dom";
 
 const SignInForm = ({ handleState }) => {
   const [isViewPassword, setIsViewPassword] = useState(false);
+  const [firebaseError, setFirebaseError] = useState(null);
+
   const { isLoginForm, setIsLoginForm } = handleState;
-  const navigate = useNavigate();
 
   const {
     register,
@@ -20,12 +20,18 @@ const SignInForm = ({ handleState }) => {
     const { email, password } = data;
 
     try {
-      await auth.signIn({ email, password });
+      const res = await auth.signIn({ email, password });
+
+      if (res && res.errorCode) {
+        console.log(res.errorCode);
+        if (res.errorCode === "auth/invalid-credential") {
+          setFirebaseError("Invalid user Credentials");
+        }
+      }
     } catch (error) {
       console.log("Sign in error: ", error.message);
     } finally {
       reset({
-        fullname: "",
         email: "",
         password: "",
       });
@@ -69,12 +75,13 @@ const SignInForm = ({ handleState }) => {
       {errors.password && (
         <p className="text-sm text-red-500">Password is required</p>
       )}
+      {firebaseError && <p className="text-sm text-red-500">{firebaseError}</p>}
       <p
         className="text-sm cursor-pointer my-2 text-center text-zinc-400"
         onClick={() => setIsLoginForm(!isLoginForm)}
       >
         New to Netflix?
-        <span className="font-semibold text-white"> Sign up now</span>
+        <span className="font-semibold text-white"> Sign In now</span>
       </p>
       <button
         type="submit"
