@@ -29,6 +29,14 @@ const Browse = () => {
     }
   }, [nowPlayingMovies]);
 
+  if (!movies) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center bg-zinc-950 text-white">
+        <h1 className="text-2xl font-semibold">Loading....</h1>
+      </div>
+    );
+  }
+
   return (
     <>
       <main className="main w-full min-h-screen bg-zinc-950 text-white overflow-hidden">
