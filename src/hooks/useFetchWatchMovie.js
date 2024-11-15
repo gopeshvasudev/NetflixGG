@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addWatchMovie } from "../store/reducers/moviesSlice";
 
 const useFetchWatchMovie = (movieId) => {
   const dispatch = useDispatch();
-
-  const watchMovie = useSelector((store) => store.movies.watchMovie);
 
   const fetchMovie = async () => {
     try {
@@ -25,7 +23,7 @@ const useFetchWatchMovie = (movieId) => {
   };
 
   useEffect(() => {
-    !watchMovie && fetchMovie();
+    fetchMovie();
   }, []);
 };
 
