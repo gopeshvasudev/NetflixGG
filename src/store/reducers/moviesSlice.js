@@ -36,6 +36,15 @@ const moviesSlice = createSlice({
     addWatchMovie(state, action) {
       state.watchMovie = action.payload;
     },
+
+    clearMovies(state) {
+      state.nowPlayingMovies = null;
+      state.popularMovies = null;
+      state.topRatedMovies = null;
+      state.upcomingMovies = null;
+      state.movieDetails = null;
+      state.watchMovie = null;
+    },
   },
 });
 
@@ -48,4 +57,5 @@ export const {
   addUpcomingMovies,
   addMovieDetails,
   addWatchMovie,
+  clearMovies,
 } = moviesSlice.actions;

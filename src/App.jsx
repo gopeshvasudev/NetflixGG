@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth as authProvider } from "./firebase/index";
 import { addUser, removeUser } from "./store/reducers/authSlice";
+import { clearMovies } from "./store/reducers/moviesSlice";
 import Header from "./components/Header";
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         navigate("/browse");
       } else {
         dispatch(removeUser());
+        dispatch(clearMovies());
         navigate("/");
       }
     });
