@@ -17,7 +17,7 @@ const MovieWatch = () => {
   }
 
   return (
-    <main className="main w-full h-screen">
+    <main className="main w-full h-screen pt-15">
       <div className="screen w-full h-full">
         <iframe
           src={`https://www.youtube.com/embed/${movie?.key}?si=YOAWQhgSNTOINWQ2`}

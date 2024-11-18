@@ -26,7 +26,7 @@ const MovieInfo = ({ movie }) => {
 
       <Link
         to={`/movie/${movie?.id}`}
-        className="px-5 py-2 rounded-full bg-zinc-800/40 border-2 border-transparent font-semibold flex items-center gap-1 hover:bg-transparent hover:border-zinc-800 hover:text-white transition-all mt-5"
+        className="px-5 py-2 rounded-full bg-black/50 border-2 border-transparent font-semibold flex items-center gap-1 hover:bg-transparent hover:border-zinc-950 hover:text-white transition-all mt-5"
       >
         <span>
           <FaInfoCircle />
