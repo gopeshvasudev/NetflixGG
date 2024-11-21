@@ -9,7 +9,7 @@ const useTopRatedMovies = () => {
   const topRatedMovies = useSelector((store) => store.movies.topRatedMovies);
 
   const fetchData = async () => {
-    const url = "https://api.themoviedb.org/3/movie/top_rated?page=1";
+    const url = "https://api.themoviedb.org/3/movie/top_rated?page=2";
 
     const res = await fetch(url, API_OPTIONS);
     const data = await res.json();

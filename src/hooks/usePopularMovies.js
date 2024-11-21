@@ -9,7 +9,7 @@ const usePopularMovies = () => {
   const popularMovies = useSelector((store) => store.movies.popularMovies);
 
   const fetchData = async () => {
-    const url = "https://api.themoviedb.org/3/movie/popular?page=1";
+    const url = "https://api.themoviedb.org/3/movie/popular?page=3";
 
     const res = await fetch(url, API_OPTIONS);
     const data = await res.json();

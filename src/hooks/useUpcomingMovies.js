@@ -9,7 +9,7 @@ const useUpcomingMovies = () => {
   const upcomingMovies = useSelector((store) => store.movies.upcomingMovies);
 
   const fetchData = async () => {
-    const url = "https://api.themoviedb.org/3/movie/upcoming?page=1";
+    const url = "https://api.themoviedb.org/3/movie/upcoming?page=4";
 
     const res = await fetch(url, API_OPTIONS);
     const data = await res.json();
