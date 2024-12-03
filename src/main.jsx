@@ -11,6 +11,7 @@ const Browse = lazy(() => import("./pages/Browse.jsx"));
 const Error = lazy(() => import("./pages/Error.jsx"));
 const MovieDetails = lazy(() => import("./pages/MovieDetails.jsx"));
 const MovieWatch = lazy(() => import("./pages/MovieWatch.jsx"));
+const SearchAi = lazy(() => import("./pages/SearchAi.jsx"));
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<h1>Loading....</h1>}>
             <Browse />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/search-ai",
+        element: (
+          <Suspense fallback={<h1>Loading....</h1>}>
+            <SearchAi />
           </Suspense>
         ),
       },

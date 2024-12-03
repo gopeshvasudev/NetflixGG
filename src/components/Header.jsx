@@ -38,6 +38,13 @@ const Header = () => {
               >
                 Logout
               </button>
+
+              <Link
+                to={"/search-ai"}
+                className="py-2 px-3 bg-red-600 text-white rounded-full font-semibold"
+              >
+                Search Ai
+              </Link>
             </div>
           </div>
         </nav>
