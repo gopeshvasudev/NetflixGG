@@ -1,31 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Link } from "react-router-dom";
+import { IoSearch } from "react-icons/io5";
 
 const SearchAi = () => {
-  const [searchQuery, setSetQuery] = useState("");
-  const query = "I wanna watch a movie which has dark romance and some adventure, thrill";
+  const [searchQuery, setSearchQuery] = useState("");
 
   async function getSearchHandler() {
-    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    try {
+      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = `Give me five movies names on the bases of this query(${query}) make sure i want only Name`;
+      const prompt = `Give me five movies names on the bases of this query(${searchQuery}) make sure i want only Name`;
 
-    const result = await model.generateContent(prompt);
-    console.log(result.response.text());
+      const result = await model.generateContent(prompt);
+      console.log(result.response.text());
+    } catch (error) {
+      console.log("search ai page error", error);
+    } finally {
+      setSearchQuery("");
+    }
   }
 
-  useEffect(() => {
+  const searchQueryHandler = () => {
     getSearchHandler();
-  }, []);
+  };
 
-  return <>
-  <main className="w-full h-screen bg-zinc-950 flex flex-col items-center justify-center gap-5">
-    <h1 className="text-center text-lg md:text-xl lg:text-2xl font-bold text-red-600">Currently this feature is in Development mode</h1>
-    <Link to={"/browse"} className="bg-zinc-800 text-white text-sm font-semibold py-3 px-6 rounded-lg hover:bg-zinc-700 duration-300">Back to Homepage</Link>
-  </main>
-  </>;
+  return (
+    <>
+      <main className="w-full h-screen bg-[url(../hero.jpg)] text-white">
+        <section className="w-full h-full bg-black/70 flex flex-col items-center justify-center px-2">
+          <div className="flex items-center w-full md:w-[600px] overflow-hidden rounded-lg bg-black/70 px-3 py-3">
+            <textarea
+              className="w-full font-medium outline-none resize-none bg-transparent"
+              rows="1"
+              placeholder="Ask your questions?"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+            ></textarea>
+
+            <button
+              className="p-2 text-2xl text-red-200 hover:bg-zinc-900 duration-300 rounded-full"
+              onClick={searchQueryHandler}
+            >
+              <IoSearch />
+            </button>
+          </div>
+        </section>
+      </main>
+    </>
+  );
 };
 
 export default SearchAi;
