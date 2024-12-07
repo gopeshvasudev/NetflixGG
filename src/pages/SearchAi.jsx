@@ -1,38 +1,22 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoSearch } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchQuery, setLoading } from "../store/reducers/searchSlice";
+import { setSearchQuery } from "../store/reducers/searchSlice";
+import useFetchSearchAiResults from "../hooks/useFetchSearchAiResults";
 
 const SearchAi = () => {
-  const searchQuery = useSelector((store) => store.search.searchQuery);
-  const loading = useSelector((store) => store.search.loading);
   const dispatch = useDispatch();
-
-  async function getSearchHandler() {
-    try {
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-      const prompt = `Provide the names of five movies related to '${searchQuery}' as a list, returning only their titles without any additional information.`;
-
-      const result = await model.generateContent(prompt);
-      console.log(result.response.text());
-    } catch (error) {
-      console.log("search ai page error", error);
-    } finally {
-      dispatch(setSearchQuery(""));
-      dispatch(setLoading());
-    }
-  }
+  const loading = useSelector((store) => store.search.loading);
+  const searchQuery = useSelector((store) => store.search.searchQuery);
+  const searchAiResultsHook = useFetchSearchAiResults();
 
   const searchQueryHandler = () => {
-    getSearchHandler();
+    searchAiResultsHook();
   };
 
   return (
     <>
       <main className="w-full h-screen bg-[url(../hero.jpg)] text-white">
-        <section className="w-full h-full bg-black/60 flex flex-col items-center justify-center gap-2 px-2">
+        <section className="w-full h-full bg-black/60 flex flex-col items-center justify-end lg:justify-center gap-2 px-2 pb-5">
           <div className="flex items-center w-full md:w-[600px] 2xl:w-[1000px] overflow-hidden rounded-xl bg-black/70 px-3 py-3">
             <input
               type="search"
@@ -56,7 +40,17 @@ const SearchAi = () => {
           </div>
 
           <div className="results-container w-full md:w-[600px] 2xl:w-[1000px] 2xl:h-[600px] h-96 bg-zinc-900 rounded-xl p-2">
-            {loading && <h1 className="text-xl font-medium">...</h1>}
+            {loading && (
+              <div className="w-full h-full flex items-center justify-center">
+                <video
+                  src="../../loading_ani.webm"
+                  className="w-48 opacity-30"
+                  autoPlay
+                  loop
+                  muted
+                ></video>
+              </div>
+            )}
           </div>
         </section>
       </main>

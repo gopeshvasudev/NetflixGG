@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   searchQuery: "",
   searchResults: [],
-  loading: true,
+  loading: false,
 };
 
 const searchSlice = createSlice({
@@ -16,8 +16,8 @@ const searchSlice = createSlice({
     setSearchResults(state, action) {
       state.searchResults = action.payload;
     },
-    setLoading(state) {
-      state.loading = false;
+    setLoading(state, action) {
+      state.loading = action.payload;
     },
   },
 });
