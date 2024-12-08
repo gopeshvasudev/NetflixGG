@@ -25,7 +25,7 @@ const MovieDetails = () => {
   const styles = {
     backgroundImage:
       backdrop_path &&
-      `url(https://image.tmdb.org/t/p/original/${backdrop_path})`,
+      `url(https://image.tmdb.org/t/p/w500/${backdrop_path})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -45,7 +45,7 @@ const MovieDetails = () => {
         <section className="left w-full md:w-1/2 h-[70vh] md:h-[82vh] flex justify-center md:justify-end lg:pr-28">
           <div className="image w-8/12 sm:w-full md:w-10/12 xl:w-8/12 bg-red-300 h-full overflow-hidden rounded-xl">
             <img
-              src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
               alt=""
               className="w-full h-full object-cover"
             />
