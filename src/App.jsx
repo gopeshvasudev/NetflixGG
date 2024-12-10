@@ -6,6 +6,7 @@ import { auth as authProvider } from "./firebase/index";
 import { addUser, removeUser } from "./store/reducers/authSlice";
 import { clearMovies } from "./store/reducers/moviesSlice";
 import Header from "./components/Header";
+import { clearSearch } from "./store/reducers/searchSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const App = () => {
       } else {
         dispatch(removeUser());
         dispatch(clearMovies());
+        dispatch(clearSearch());
         navigate("/");
       }
     });

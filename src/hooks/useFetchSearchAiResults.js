@@ -1,28 +1,59 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, setSearchQuery } from "../store/reducers/searchSlice";
+import {
+  setError,
+  setLoading,
+  setSearchQuery,
+  setSearchResults,
+} from "../store/reducers/searchSlice";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { API_OPTIONS } from "../utils/constants";
 
 const useFetchSearchAiResults = () => {
   const dispatch = useDispatch();
   const searchQuery = useSelector((store) => store.search.searchQuery);
 
-  async function getSearchHandler() {
+  const fetchMoviesData = async (movieName) => {
+    try {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${movieName}&include_adult=false&language=en-US&page=1`,
+        API_OPTIONS
+      );
+      const data = await res.json();
+
+      return data;
+    } catch (error) {
+      console.log("Search movies data error: ", error);
+    }
+  };
+
+  const getSearchHandler = async () => {
     try {
       dispatch(setLoading(true));
+
       const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = `Provide an comma seperated names of five movies related to '${searchQuery}' as a list, returning only their titles without any additional information. Ensure that if any query will came which is not related to movies just simple return 'This model is only compatible with movies searches'`;
+      const prompt = `Provide a comma-separated list of six movie names related to '${searchQuery}' as a list, returning only their titles without any additional information. If the query is not related to movies, return 'This model is only compatible with movie searches.'`;
 
-      const result = await model.generateContent(prompt);
-      console.log(result.response.text());
+      const aiResult = await model.generateContent(prompt);
+      const movieNames = aiResult.response.text().split(", ");
+
+      if (movieNames.length > 1) {
+        const fetchedData = movieNames?.map(fetchMoviesData);
+        const resolvedMoviesData = await Promise.allSettled(fetchedData);
+
+        dispatch(setError(null));
+        dispatch(setSearchResults(resolvedMoviesData));
+      } else {
+        dispatch(setError(movieNames[0]));
+      }
     } catch (error) {
-      console.log("search ai page error", error);
+      console.error("Error in fetching AI search results:", error);
     } finally {
-      dispatch(setSearchQuery(""));
-      dispatch(setLoading(false));
+      dispatch(setSearchQuery("")); // Reset the search query
+      dispatch(setLoading(false)); // Stop loading
     }
-  }
+  };
 
   return getSearchHandler;
 };
