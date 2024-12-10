@@ -18,15 +18,19 @@ const Header = () => {
   const toggleNavigators = () => {
     setIsSmallDevice(!isSmallDevice);
   };
-  
+
   return (
     <>
       <header className="fixed w-full top-0 left-0 z-[100]">
         {logoutConfirm && <LogoutConfirm setLogoutConfirm={setLogoutConfirm} />}
         <nav className="relative navbar w-full h-[12vh] bg-gradient-to-b from-zinc-950 to-transparent text-white flex items-center justify-between px-2 sm:px-5">
-          <div className="left flex items-center gap-10">
+          <div className="left flex items-center gap-10 overflow-hidden">
             <Link to={"/browse"}>
-              <img src="../logo.webp" alt="Logo" className="w-[180px]" />
+              <img
+                src="../logo.webp"
+                alt="Logo"
+                className="w-[170px] pointer-events-none"
+              />
             </Link>
           </div>
 
