@@ -36,16 +36,20 @@ const useFetchSearchAiResults = () => {
       const prompt = `Provide a comma-separated list of six movie names related to '${searchQuery}' as a list, returning only their titles without any additional information. If the query is not related to movies, return 'This model is only compatible with movie searches.'`;
 
       const aiResult = await model.generateContent(prompt);
-      const movieNames = aiResult.response.text().split(", ");
+      const aiTextResult = aiResult.response.text();
+      const movieNames = aiTextResult.split(", ");
 
-      if (movieNames.length > 1) {
+      if (
+        aiTextResult.trim() ===
+        "This model is only compatible with movie searches."
+      ) {
+        dispatch(setError(aiTextResult));
+      } else {
         const fetchedData = movieNames?.map(fetchMoviesData);
         const resolvedMoviesData = await Promise.allSettled(fetchedData);
 
         dispatch(setError(null));
         dispatch(setSearchResults(resolvedMoviesData));
-      } else {
-        dispatch(setError(movieNames[0]));
       }
     } catch (error) {
       console.error("Error in fetching AI search results:", error);
