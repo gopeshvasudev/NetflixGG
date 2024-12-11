@@ -42,8 +42,8 @@ const MovieDetails = () => {
   return (
     <main id="details-main" className="main w-full text-white" style={styles}>
       <div className="w-full min-h-screen bg-black/85 flex flex-col gap-5 md:flex-row pt-24 px-2">
-        <section className="left w-full md:w-1/2 h-[70vh] md:h-[78vh] flex justify-center md:justify-end lg:pr-28">
-          <div className="image w-11/12 sm:w-6/12 md:w-10/12 xl:w-8/12 bg-red-300 h-full overflow-hidden rounded-xl">
+        <section className="left w-full md:w-1/2 h-[500px] md:h-[460px] flex justify-center md:justify-end lg:pr-28">
+          <div className="image w-11/12 sm:w-6/12 md:w-10/12 lg:w-[340px] bg-red-300 h-full overflow-hidden rounded-xl">
             <img
               src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
               alt=""
@@ -85,7 +85,7 @@ const MovieDetails = () => {
           {status == "Released" && (
             <Link
               to={`/movie/watch/${movieId}`}
-              className="font-semibold text-sm bg-[#ED1C28] p-2 rounded-lg mb-5 sm:mb-0"
+              className="font-semibold text-sm bg-[#ED1C28] p-2 rounded-lg mb-5"
             >
               Watch Now
             </Link>

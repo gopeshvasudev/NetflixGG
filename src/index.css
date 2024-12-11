@@ -7,6 +7,19 @@
   src: url(../Bonny-Variable.woff2);
 }
 
+*::-webkit-scrollbar {
+  width: 10px;
+  background-color: #09090B;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #333;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #444;
+}
+
 .scrollable-container::-webkit-scrollbar {
   display: none;
 }

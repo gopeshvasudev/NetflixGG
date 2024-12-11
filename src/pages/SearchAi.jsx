@@ -24,7 +24,7 @@ const SearchAi = () => {
 
   return (
     <main className="w-full h-screen bg-[url(../hero.jpg)] text-white">
-      <section className="w-full h-full bg-black/60 flex flex-col items-center justify-end lg:justify-center gap-2 px-2 pb-5">
+      <section className="w-full h-full bg-black/60 flex flex-col items-center justify-end 2xl:justify-center gap-2 px-2 pb-5">
         <div className="flex items-center w-full md:w-[600px] 2xl:w-[1000px] overflow-hidden rounded-xl bg-black/70 px-3 py-3">
           <input
             type="search"
@@ -47,7 +47,7 @@ const SearchAi = () => {
           </button>
         </div>
 
-        <div className="results-container w-full md:w-[600px] 2xl:w-[1000px] 2xl:h-[600px] h-96 bg-zinc-900 rounded-xl p-2">
+        <div className="results-container w-full md:w-[600px] 2xl:w-[1000px] 2xl:h-[600px] h-[70%] bg-zinc-900 rounded-xl p-2">
           {loading ? (
             <SearchLoader />
           ) : (
