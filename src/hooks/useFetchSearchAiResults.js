@@ -33,16 +33,13 @@ const useFetchSearchAiResults = () => {
       const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = `Provide a comma-separated list of six movie names related to '${searchQuery}' as a list, returning only their titles without any additional information. If the query is not related to movies, return 'This model is only compatible with movie searches.'`;
+      const prompt = `Return six movie titles related to '${searchQuery}' as a comma-separated list. If unrelated to movies, respond with 'This model only supports movie searches.'`;
 
       const aiResult = await model.generateContent(prompt);
       const aiTextResult = aiResult.response.text();
       const movieNames = aiTextResult.split(", ");
 
-      if (
-        aiTextResult.trim() ===
-        "This model is only compatible with movie searches."
-      ) {
+      if (aiTextResult.trim() === "This model only supports movie searches.") {
         dispatch(setError(aiTextResult));
       } else {
         const fetchedData = movieNames?.map(fetchMoviesData);
